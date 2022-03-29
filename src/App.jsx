@@ -1,16 +1,7 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Fragment } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Home from "./routes/home/home";
-
-const Navigation = () => {
-  return (
-    <div>
-      <div>
-        <h1>Nav bar</h1>
-      </div>
-      <Outlet />
-    </div>
-  )
-}
+import Navigation from './routes/navigation/navigation';
 
 const App = () => {
   return (
