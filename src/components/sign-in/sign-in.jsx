@@ -26,8 +26,18 @@ const SignIn = () => {
             console.log(response)
             resetFormFields();
         } catch (error) {
+            switch (error.code) {
+                case 'auth/wrong-password':
+                    alert('Incorrect password for email!');
+                    break
+                case 'auth/user-not-found':
+                    alert('No user associated with this email');
+                    break;
+                default:
+                    console.log(error)
+            }
         }
-    }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -56,10 +66,16 @@ const SignIn = () => {
                     value={password}
                 />
                 <div className="btn-container">
-                <CustomButton type="submit">Sign In </CustomButton>
-                <CustomButton buttonType={'google'} onClick={signInWithGoogle}>Google sign in </CustomButton>
+                    <CustomButton type="submit">Sign In </CustomButton>
+                    <CustomButton
+                        type="button"
+                        buttonType={'google'}
+                        onClick={signInWithGoogle}
+                    >
+                        Google sign in
+                    </CustomButton>
                 </div>
-                
+
             </form>
         </div>
     )
