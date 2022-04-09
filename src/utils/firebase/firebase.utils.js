@@ -5,6 +5,7 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
 } from 'firebase/auth';
 import {
     getFirestore,
@@ -59,5 +60,9 @@ export const createUserDocumentFromAuth = async (userAuth, aditionalInformation 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
     //controls the vast majority or services within firebase. If one of them changes, my app won't stop working
     if (!email || !password) return;
-    return await createUserDocumentFromAuth(auth, email, password )
+    return await createUserWithEmailAndPassword(auth, email, password )
+}
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+    return await createUserWithEmailAndPassword(auth, email, password )
 }
