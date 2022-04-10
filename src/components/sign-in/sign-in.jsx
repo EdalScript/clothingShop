@@ -28,6 +28,7 @@ const SignIn = () => {
             const user = await signInAuthUserWithEmailAndPassword(email, password);
             setCurrentUser(user);
             resetFormFields();
+            alert(`Welcome back! ${user}`)
         } catch (error) {
             switch (error.code) {
                 case 'auth/wrong-password':
