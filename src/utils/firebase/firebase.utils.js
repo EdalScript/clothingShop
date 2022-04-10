@@ -6,6 +6,7 @@ import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signOut,
 } from 'firebase/auth';
 import {
     getFirestore,
@@ -35,7 +36,7 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 export const db = getFirestore();
 export const createUserDocumentFromAuth = async (userAuth, aditionalInformation = {}) => {
-    if(!userAuth) return;
+    if (!userAuth) return;
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
 
@@ -60,9 +61,11 @@ export const createUserDocumentFromAuth = async (userAuth, aditionalInformation 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
     //controls the vast majority or services within firebase. If one of them changes, my app won't stop working
     if (!email || !password) return;
-    return await createUserWithEmailAndPassword(auth, email, password )
+    return await createUserWithEmailAndPassword(auth, email, password)
 }
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
-    return await createUserWithEmailAndPassword(auth, email, password )
+    return await signInWithEmailAndPassword(auth, email, password)
 }
+
+export const signOutUser = async () => await signOut(auth);
